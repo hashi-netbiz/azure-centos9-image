@@ -65,7 +65,7 @@ EOF
 dracut -fv
 
 # step 11
-dnf -y install python-pyasn1 WALinuxAgent
+dnf -y install python-pyasn1 WALinuxAgent --nobest
 systemctl enable waagent
 
 # step 12
@@ -74,6 +74,7 @@ dnf -y install cloud-init cloud-utils-growpart gdisk hyperv-daemons
 ## Configure waagent for cloud-init
 sed -i 's/Provisioning.UseCloudInit=n/Provisioning.UseCloudInit=y/g' /etc/waagent.conf
 sed -i 's/Provisioning.Enabled=y/Provisioning.Enabled=n/g' /etc/waagent.conf
+sed -i 's/# AutoUpdate.Enabled=y/AutoUpdate.Enabled=y/g' /etc/waagent.conf
 
 
 echo "Adding mounts and disk_setup to init stage"

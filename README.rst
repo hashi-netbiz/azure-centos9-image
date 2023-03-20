@@ -6,17 +6,6 @@ Description
 -----------
 This repo provides some scripts to be able to generate a customized CentOS Stream 9 image that is usable on the Azure cloud.
 
-The scripts were developed on Fedora 36 so I will asume you're using that or something very similar. Also, that you understand the
-use of libvirt/kvm/qemu in order to run these images.
-
-Pre-requisites
---------------
-Install the following:
-
-* libvirt-daemon
-* qemu-img
-* virt-manager
-
 Instructions
 ------------
 

@@ -13,7 +13,7 @@ Instructions
 ############
 Refer to the HyperV-centos-Install.doc document for the installation of
 Hyper-V hypervisor on windows 10/11 and deployment of a minimal CentOS Stream 9 
-virtual image. The follwing boot iso is used:
+virtual image. The following boot iso is used:
 
     http://mirror.stream.centos.org/9-stream/BaseOS/x86_64/iso/CentOS-Stream-9-latest-x86_64-boot.iso
 

@@ -112,10 +112,10 @@ sed -i 's/ResourceDisk.Format=y/ResourceDisk.Format=n/g' /etc/waagent.conf
 sed -i 's/ResourceDisk.EnableSwap=y/ResourceDisk.EnableSwap=n/g' /etc/waagent.conf
 
 # step 14
-rm -f /var/log/waagent.log
-cloud-init clean
-waagent -force -deprovision+user
-rm -f ~/.bash_history
-export HISTSIZE=0
-systemctl  poweroff
+#rm -f /var/log/waagent.log
+#cloud-init clean
+#waagent -force -deprovision+user
+#rm -f ~/.bash_history
+#export HISTSIZE=0
+#systemctl  poweroff
 

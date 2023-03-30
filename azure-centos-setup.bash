@@ -114,7 +114,7 @@ sed -i 's/ResourceDisk.EnableSwap=y/ResourceDisk.EnableSwap=n/g' /etc/waagent.co
 # step 14
 rm -rf azure-centos9-image
 rm -f .ssh/known-hosts
-erase git-core -y
+yum erase git-core -y
 rm -f .gitconfig
 rm -f /var/log/waagent.log
 cloud-init clean

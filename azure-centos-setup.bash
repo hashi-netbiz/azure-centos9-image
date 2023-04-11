@@ -37,14 +37,16 @@ ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
 # step 6
 cat << 'EOF' > /etc/yum.repos.d/openlogic.repo
 [openlogic]
-name=CentOS-8 - openlogic packages for $basearch
-baseurl=http://olcentgbl.trafficmanager.net/openlogic/8/openlogic/$basearch/
+name=CentOS-$releasever - openlogic packages for $basearch
+baseurl=http://olcentgbl.trafficmanager.net/openlogic/$releasever/openlogic/$basearch/
 enabled=1
-gpgcheck=0
+gpgcheck=1
+gpgkey=http://olcentgbl.trafficmanager.net/openlogic/$releasever/openlogic/$basearch/OpenLogic-GPG-KEY
 
 EOF
 
 # step 7
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 dnf -y upgrade
 
 # step 8
@@ -111,15 +113,26 @@ EOF
 sed -i 's/ResourceDisk.Format=y/ResourceDisk.Format=n/g' /etc/waagent.conf
 sed -i 's/ResourceDisk.EnableSwap=y/ResourceDisk.EnableSwap=n/g' /etc/waagent.conf
 
-# step 14
-rm -rf azure-centos9-image
-rm -f .ssh/known-hosts
-yum erase git-core -y
-rm -f .gitconfig
-rm -f /var/log/waagent.log
-cloud-init clean
-waagent -force -deprovision+user
-rm -f ~/.bash_history
-export HISTSIZE=0
-systemctl  poweroff
+# step 14 (install ansible and configure CIS benchmark)
+dnf install ansible-core -y
+# update hosts file
+cat << 'EOF' >> /etc/ansible/hosts
+localhost ansible_connection=local
+
+EOF
+
+# execute ansible playbook to install CIS benchmarks
+ansible-playbook 'azure-centos9-image/cis-benchmark/cis_5.2.yml'
+
+# step 15
+# rm -rf azure-centos9-image
+# rm -f .ssh/known-hosts
+# yum erase git-core -y
+# rm -f .gitconfig
+# rm -f /var/log/waagent.log
+# cloud-init clean
+# waagent -force -deprovision+user
+# rm -f ~/.bash_history
+# export HISTSIZE=0
+# systemctl  poweroff
 

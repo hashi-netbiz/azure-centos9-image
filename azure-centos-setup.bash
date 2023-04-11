@@ -125,14 +125,14 @@ EOF
 ansible-playbook '/root/azure-centos9-image/cis-benchmark/cis_5.2.yml'
 
 # step 15
-# rm -rf azure-centos9-image
-# rm -f .ssh/known-hosts
-# yum erase git-core -y
-# rm -f .gitconfigS
-# rm -f /var/log/waagent.log
-# cloud-init clean
-# waagent -force -deprovision+user
-# rm -f ~/.bash_history
-# export HISTSIZE=0
-# systemctl  poweroff
+rm -rf azure-centos9-image
+rm -f .ssh/known-hosts
+yum erase git-core -y
+rm -f .gitconfigS
+rm -f /var/log/waagent.log
+cloud-init clean
+waagent -force -deprovision+user
+rm -f ~/.bash_history
+export HISTSIZE=0
+systemctl  poweroff
 

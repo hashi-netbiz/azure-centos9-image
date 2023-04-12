@@ -125,8 +125,8 @@ EOF
 ansible-playbook '/root/azure-centos9-image/cis-benchmark/cis_5.2.yml'
 
 # step 15
-rm -rf azure-centos9-image
-rm -f .ssh/known-hosts
+rm -rf /root/azure-centos9-image
+rm -f /root/.ssh/known-hosts
 yum erase git-core -y
 rm -f .gitconfigS
 rm -f /var/log/waagent.log

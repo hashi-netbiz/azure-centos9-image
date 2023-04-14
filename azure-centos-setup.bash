@@ -113,20 +113,9 @@ EOF
 sed -i 's/ResourceDisk.Format=y/ResourceDisk.Format=n/g' /etc/waagent.conf
 sed -i 's/ResourceDisk.EnableSwap=y/ResourceDisk.EnableSwap=n/g' /etc/waagent.conf
 
-# step 14 (install ansible and configure CIS benchmark)
-dnf install ansible-core -y
-# update hosts file
-cat << 'EOF' >> /etc/ansible/hosts
-localhost ansible_connection=local
-
-EOF
-
-# execute ansible playbook to install CIS benchmarks
-ansible-playbook '/root/azure-centos9-image/cis-benchmark/cis_5.2.yml'
-
-# step 15
-rm -rf /root/azure-centos9-image
-rm -f /root/.ssh/known-hosts
+# step 14
+rm -rf azure-centos9-image
+rm -f .ssh/known-hosts
 yum erase git-core -y
 rm -f .gitconfigS
 rm -f /var/log/waagent.log

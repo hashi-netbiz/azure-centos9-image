@@ -50,13 +50,8 @@ sed -i 's/Provisioning.UseCloudInit=n/Provisioning.UseCloudInit=y/g' /etc/waagen
 sed -i 's/Provisioning.Enabled=y/Provisioning.Enabled=n/g' /etc/waagent.conf
 sed -i 's/# AutoUpdate.Enabled=y/AutoUpdate.Enabled=y/g' /etc/waagent.conf
 sed -i 's/ResourceDisk.Format=y/ResourceDisk.Format=n/g' /etc/waagent.conf
-sed -i 's/ResourceDisk.EnableSwap=y/ResourceDisk.EnableSwap=n/g' /etc/waagent.conf
-
-# ResourceDisk.Format=y
-# ResourceDisk.Filesystem=ext4
-# ResourceDisk.MountPoint=/mnt/resource
-# ResourceDisk.EnableSwap=y
-# ResourceDisk.SwapSizeMB=4096    ## setting swap to 4Gb
+sed -i 's/ResourceDisk.EnableSwap=n/ResourceDisk.EnableSwap=y/g' /etc/waagent.conf
+sed -i 's/ResourceDisk.SwapSizeMB=0/ResourceDisk.SwapSizeMB=4096/g' /etc/waagent.conf
 
 cat << 'EOF' >> /etc/cloud/cloud.cfg.d/05_logging.cfg
 ## This tells cloud-init to redirect its stdout and stderr to
@@ -66,14 +61,13 @@ output: {all: '| tee -a /var/log/cloud-init-output.log'}
 
 EOF
 
-
 # step 
 rm -rf /root/azure-centos9-image
 rm -f /root/.ssh/known-hosts
 yum erase git-core -y
 rm -f /var/log/waagent.log
 cloud-init clean
-waagent -force -deprovision+user
+waagent -force -deprovision
 rm -f /root/.bash_history
 export HISTSIZE=0
 systemctl  poweroff

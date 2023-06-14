@@ -39,7 +39,7 @@ grubby \
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # step Installing the Azure Linux Client
-dnf -y install python-pyasn1 WALinuxAgent --nobest
+dnf -y install WALinuxAgent --nobest
 systemctl enable waagent
 
 # step 12

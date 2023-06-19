@@ -88,5 +88,5 @@ cloud-init clean
 waagent -force -deprovision+user
 rm -f /root/.bash_history
 export HISTSIZE=0
-#systemctl  poweroff
+systemctl  poweroff
 

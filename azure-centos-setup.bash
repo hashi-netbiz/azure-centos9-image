@@ -7,13 +7,12 @@
 # verbosity
 set -x
 
-dnf -y install network-scripts
-systemctl enable network.service
+dnf -y install initscripts-10.11.4-1.el9 ipcalc bc
+rpm -ivh https://blog.racknerd.com/wp-content/uploads/2022/12/network-scripts-10.11.4-1.el9.x86_64.rpm
 
 cat << 'EOF' > /etc/sysconfig/network
 NETWORKING=yes
 HOSTNAME=localhost.localdomain
-
 EOF
 
 # step 4
@@ -25,7 +24,6 @@ TYPE=Ethernet
 USERCTL=no
 PEERDNS=yes
 IPV6INIT=no
-
 EOF
 
 ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
@@ -40,7 +38,7 @@ grubby \
 
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
-sudo dnf makecache
+dnf makecache
 dnf -y install python3-pyasn1 WALinuxAgent --nobest
 systemctl enable waagent
 

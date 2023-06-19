@@ -7,8 +7,8 @@
 # verbosity
 set -x
 
-dnf -y install initscripts-10.11.4-1.el9 ipcalc bc
-rpm -ivh https://blog.racknerd.com/wp-content/uploads/2022/12/network-scripts-10.11.4-1.el9.x86_64.rpm
+dnf -y install epel-release
+dnf -y install ntfs-3g
 
 cat << 'EOF' > /etc/sysconfig/network
 NETWORKING=yes
